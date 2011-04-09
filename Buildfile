@@ -16,7 +16,7 @@ config :all do |c|
   # Name any other frameworks your bundles depend upon.  The stylesheets and
   # JavaScript for required bundles will be loaded before your bundle on your
   # page.
-  c[:required] = [:sproutcore, :otherinbox_theme]
+  c[:required] = [:sproutcore, :otherinbox_theme, :ki, :jasmine-sproutcore]
   
   # This string will be prepended before any URLs that reference JavaScript,
   # CSS or images in your files.
