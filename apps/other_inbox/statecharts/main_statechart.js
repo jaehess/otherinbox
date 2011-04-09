@@ -9,11 +9,22 @@
 // Time: 12:30 PM
 
 // MENTORS
-// Am I on the right track here?  I've found the core_oi framework to be
-// difficult to mentally "parse".  Here all I'm doing is defining the
+// Am I on the right track here?  Here all I'm doing is defining the
 // states as I understand them from using the otherinbox application;
-// I'm not yet concerned with events and actions.
+// I'm not yet concerned with events and actions.  However, I am anticipating
+// some useful external state variables.
+//
+// I'm continuing to look at the core_oi framework to extract the states from.
 MyApp.statechart = Ki.Statechart.create({
+
+  /**
+   * external state variables for which folder you're in
+   */
+  INBOX_FOLDER_ID: 1,
+  SAVED_FOLDER_ID: 2,
+  DELETED_FOLDER_ID: 3,
+  SENT_FOLDER_ID: 4,
+  BLOCKED_FOLDER_ID: 5,
 
   rootState: Ki.State.design({
 
@@ -34,33 +45,7 @@ MyApp.statechart = Ki.Statechart.create({
 
       initialSubstate: 'Messages',
 
-      /**
-       * The substates when Messages is selected in the tool bar
-       * are defined by the buttons in the left pane.
-       */
       Messages: Ki.State.design({
-
-        initialSubstate: 'Inbox',
-
-        Inbox: Ki.State.design({
-
-        }),
-
-        Saved: Ki.State.design({
-
-        }),
-
-        Deleted: Ki.State.design({
-
-        }),
-
-        Sent: Ki.State.design({
-
-        }),
-
-        Blocked: Ki.State.design({
-
-        })
 
       }),
 
