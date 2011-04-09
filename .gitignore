@@ -3,4 +3,6 @@ public/
 tmp/
 .DS_Store
 frameworks/sproutcore
+frameworks/jasmine-sproutcore
+frameworks/ki
 .idea/
