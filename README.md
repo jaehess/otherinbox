@@ -62,8 +62,8 @@ Note: you only have to do this once.  The next time you enter the project direct
 
 # To see the application
 
-[http://localhost:4020/otherinbox](http://localhost:4020/otherinbox) shows the application.
+[http://localhost:4020/other_inbox](http://localhost:4020/other_inbox) shows the application.
 
 # To run the tests
 
-[http://localhost:4020/otherinbox/en/current/tests.html](http://localhost:4020/otherinbox/en/current/tests.html)
+[http://localhost:4020/other_inbox/en/current/tests.html](http://localhost:4020/other_inbox/en/current/tests.html)
