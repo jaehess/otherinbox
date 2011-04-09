@@ -25,6 +25,7 @@ Here's how:
 
 1. Install [rvm](https://rvm.beginrescueend.com/)
 2. Then
+
     $ rvm install ruby-1.9.2-p136
     $ rvm gemset create otherinbox
     $ rvm gemset use otherinbox
