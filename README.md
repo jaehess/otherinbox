@@ -25,11 +25,10 @@ Here's how:
 
 1. Install [rvm](https://rvm.beginrescueend.com/)
 2. Then
-
-    $ rvm install ruby-1.9.2-p136
-    $ rvm gemset create otherinbox
-    $ rvm gemset use otherinbox
-    $ gem install sproutcore -v 1.5.0.pre.5
+        $ rvm install ruby-1.9.2-p136
+        $ rvm gemset create otherinbox
+        $ rvm gemset use otherinbox
+        $ gem install sproutcore -v 1.5.0.pre.5
 
 The last command will take several minutes.
 
