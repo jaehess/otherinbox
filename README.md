@@ -1,4 +1,15 @@
-# Tic-tac-toe game in SproutCore Using Jasmine
+# OtherInBox Web Application in SproutCore with testing in Jasmine
+
+*TODO: explain what this app does*
+
+## Development Status
+
+This is currently being upgraded with the following:
+
+- Use statecharts
+- Upgrade with jasmine automated regression tests.
+
+Presently the application doesn't work very well yet (on this branch); however you are welcome to download it and fool around.
 
 # Prerequisites
 
@@ -12,7 +23,8 @@ If you really want to avoid "gem hell" issues, use **Ruby Version Manager** (**r
 
 Here's how:
 
-    Install [rvm](https://rvm.beginrescueend.com/)
+1. Install [rvm](https://rvm.beginrescueend.com/)
+2. Then
     $ rvm install ruby-1.9.2-p136
     $ rvm gemset create otherinbox
     $ rvm gemset use otherinbox
@@ -50,8 +62,8 @@ Note: you only have to do this once.  The next time you enter the project direct
 
 # To see the application
 
-- http://localhost:4020/otherinbox shows the application.
+[http://localhost:4020/otherinbox](http://localhost:4020/otherinbox) shows the application.
 
 # To run the tests
 
-- http://localhost:4020/otherinbox/en/current/tests.html
+[http://localhost:4020/otherinbox/en/current/tests.html](http://localhost:4020/otherinbox/en/current/tests.html)
