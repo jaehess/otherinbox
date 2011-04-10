@@ -9,65 +9,172 @@
 // Time: 12:30 PM
 
 // MENTORS
-// Am I on the right track here?  Here all I'm doing is defining the
-// states as I understand them from using the otherinbox application;
-// I'm not yet concerned with events and actions.  However, I am anticipating
-// some useful external state variables.
+// Here's my translation of the state chart defined in the graffle.
+// At this point, only state definition.
+// I presume I have the naming right, i.e. use the more descriptive
+// name as the state name and the '<letter><digit>' in the comment; let
+// me know if I have this wrong.
 //
-// I'm continuing to look at the core_oi framework to extract the states from.
-MyApp.statechart = Ki.Statechart.create({
-
-  /**
-   * external state variables for which folder you're in
-   */
-  INBOX_FOLDER_ID: 1,
-  SAVED_FOLDER_ID: 2,
-  DELETED_FOLDER_ID: 3,
-  SENT_FOLDER_ID: 4,
-  BLOCKED_FOLDER_ID: 5,
+// Next am going to flesh out events
+OI.runningStateChart = Ki.Statechart.create({
 
   rootState: Ki.State.design({
 
-    initialSubstate: 'Loading',
+    initialSubstate: 'Application',
 
     /**
-     * The initial state while OtherInBox is loading
+     * A1
      */
-    Loading: Ki.State.design({
-
-    }),
-
-    /**
-     * When loading is complete, this is the running overview state.
-     * The primary state is determined by which button is active in the toolbar.
-     */
-    Toolbar: Ki.State.design({
+    Application: Ki.State.design({
 
       initialSubstate: 'Messages',
 
+      /**
+       * B1
+       */
       Messages: Ki.State.design({
+
+        /**
+         * C1
+         */
+        Focus: Ki.State.design({
+
+          initSubstate: 'Mailboxes',
+
+          /**
+           * D1
+           */
+          Mailboxes: Ki.State.design({
+
+            initSubstate: 'ExamineFolderMailboxes',
+
+            /**
+             * E1
+             */
+            ExamineFolderMailboxes: Ki.State.design({
+              
+            }),
+
+            /**
+             * E2
+             */
+            LoadingMailboxes: Ki.State.design({
+
+            }),
+
+            /**
+             * E3
+             */
+            FolderHasNoMailboxes: Ki.State.design({
+
+            }),
+
+            /**
+             * E4
+             */
+            MailboxSelected: Ki.State.design({
+
+            })
+            
+          }),
+
+          /**
+           * D2
+           */
+          Messages: Ki.State.design({
+
+            initSubstate: 'ExamineMailboxMessages',
+
+            /**
+             * F1
+             */
+            ExamineMailboxMessages: Ki.State.design({
+
+            }),
+
+            /**
+             * F2
+             */
+            LoadingMessages: Ki.State.design({
+
+            }),
+
+            /**
+             * F3
+             */
+            NoSelection: Ki.State.design({
+
+            }),
+
+            /**
+             * F4
+             */
+            MessageSelected: Ki.State.design({
+
+            })
+
+          })
+
+        }),
+
+        /**
+         * C2
+         */
+        Reload: Ki.State.design({
+
+        }),
+
+        /**
+         * C3
+         */
+        Error: Ki.State.design({
+
+        }),
+
+        /**
+         * C4
+         */
+        Mailboxes: Ki.State.design({
+
+        }),
+
+        /**
+         * C5
+         */
+        Messages: Ki.State.design({
+
+        })
+
 
       }),
 
+      /**
+       * B2
+       */
       Receipts: Ki.State.design({
 
       }),
 
+      /**
+       * B3
+       */
       Coupons: Ki.State.design({
 
       }),
 
+      /**
+       * B4
+       */
       Calendar: Ki.State.design({
 
-      }),
-
-      Help: Ki.State.design({
-
-      }),
-
-      Settings: Ki.State.design({
-
       })
+
+    }),
+
+    /**
+     * A2
+     */
+    SignOut: Ki.State.design({
 
     })
 
