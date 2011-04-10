@@ -59,13 +59,21 @@ OI.runningStateChart = Ki.Statechart.create({
              * E1
              */
             ExamineFolderMailboxes: Ki.State.design({
-              
+
+              enterState: function() {
+
+              }
+
             }),
 
             /**
              * E2
              */
             LoadingMailboxes: Ki.State.design({
+
+              enterState: function() {
+
+              }
 
             }),
 
@@ -74,12 +82,20 @@ OI.runningStateChart = Ki.Statechart.create({
              */
             FolderHasNoMailboxes: Ki.State.design({
 
+              enterState: function() {
+
+              }
+
             }),
 
             /**
              * E4
              */
             MailboxSelected: Ki.State.design({
+
+              enterState: function() {
+
+              }
 
             })
             
@@ -97,12 +113,20 @@ OI.runningStateChart = Ki.Statechart.create({
              */
             ExamineMailboxMessages: Ki.State.design({
 
+              enterState: function() {
+
+              }
+
             }),
 
             /**
              * F2
              */
             LoadingMessages: Ki.State.design({
+
+              enterState: function() {
+
+              }
 
             }),
 
@@ -111,12 +135,20 @@ OI.runningStateChart = Ki.Statechart.create({
              */
             NoSelection: Ki.State.design({
 
+              enterState: function() {
+
+              }
+
             }),
 
             /**
              * F4
              */
             MessageSelected: Ki.State.design({
+
+              enterState: function() {
+
+              }
 
             })
 
@@ -129,12 +161,20 @@ OI.runningStateChart = Ki.Statechart.create({
          */
         Reload: Ki.State.design({
 
+          enterState: function() {
+
+          }
+
         }),
 
         /**
          * C3
          */
         Error: Ki.State.design({
+
+          enterState: function() {
+
+          }
 
         }),
 
@@ -143,12 +183,20 @@ OI.runningStateChart = Ki.Statechart.create({
          */
         Mailboxes: Ki.State.design({
 
+          enterState: function() {
+
+          }
+
         }),
 
         /**
          * C5
          */
         Messages: Ki.State.design({
+
+          enterState: function() {
+
+          }
 
         })
 
@@ -160,6 +208,10 @@ OI.runningStateChart = Ki.Statechart.create({
        */
       Receipts: Ki.State.design({
 
+        enterState: function() {
+
+        }
+
       }),
 
       /**
@@ -167,12 +219,20 @@ OI.runningStateChart = Ki.Statechart.create({
        */
       Coupons: Ki.State.design({
 
+        enterState: function() {
+
+        }
+
       }),
 
       /**
        * B4
        */
       Calendar: Ki.State.design({
+
+        enterState: function() {
+
+        }
 
       })
 
@@ -182,6 +242,10 @@ OI.runningStateChart = Ki.Statechart.create({
      * A2
      */
     SignOut: Ki.State.design({
+
+      enterState: function() {
+
+      }
 
     })
 

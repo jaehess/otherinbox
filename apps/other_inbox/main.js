@@ -38,7 +38,10 @@ function enterApplication() {
   
   var user = CoreOI.get('user') ;
   OI.userController.set('content', user) ;
-  
+
+  OI.runningStateChart.initStatechart();
+/*
+Old state chart
   // install our chrome updating function to run when necessary
   OI.registerChromeObservers() ;
   
@@ -51,4 +54,6 @@ function enterApplication() {
   
   // give our statechart a chance to respond to controller changes
   OI.registerStatechartObservers() ;
+ */
 }
+
