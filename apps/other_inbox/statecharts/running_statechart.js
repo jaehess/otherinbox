@@ -10,7 +10,6 @@
 
 // MENTORS
 // Here's my translation of the state chart defined in the graffle.
-// At this point, only state definition.
 // I presume I have the naming right, i.e. use the more descriptive
 // name as the state name and the '<letter><digit>' in the comment; let
 // me know if I have this wrong.
@@ -33,6 +32,14 @@ OI.runningStateChart = Ki.Statechart.create({
 
     initialSubstate: 'Application',
 
+    openCalendar: function() {
+      window.open('/calendars', '_self') ;
+    },
+
+    openSettings: function() {
+      window.open('/identity','_self') ;
+    },
+
     /**
      * A1
      */
@@ -47,6 +54,26 @@ OI.runningStateChart = Ki.Statechart.create({
         if (!pane.get('isAttached')) pane.append() ;
       },
 
+      openReceipts: function() {
+        if (CoreOI.get('user').subscribesTo("ParsingService")) {
+          window.open('/receipts', '_self') ;
+        } else {
+          CoreOI.makeComingSoonFlash() ;
+        }
+      },
+
+      openAdmin: function() {
+        window.open('/admin', '_self') ;
+      },
+
+      makeNewInvitation: function() {
+        window.open('/invitations/new', '_blank', "height=430,width=796,status=no") ;
+      },
+
+      openHelp: function() {
+        window.open('http://help.otherinbox.com/', '_blank') ;
+      },
+
       initialSubstate: 'Messages',
 
       /**
@@ -57,6 +84,10 @@ OI.runningStateChart = Ki.Statechart.create({
         enterState: function() {
           // document.title is handled by the updateChrome() method:
           OI.updateChrome() ; // make sure it runs when we switch here
+        },
+
+        newMailbox: function() {
+          window.open('/mailboxes/new', '_blank') ;
         },
 
         initSubstate: 'Focus',
@@ -73,6 +104,148 @@ OI.runningStateChart = Ki.Statechart.create({
           // to be implemented?  Or can I remove it?
           enterState: function() {
             // alert("State 'C1' (Focus) not implemented.") ;
+          },
+
+          openMessage: function() {
+            if (OI.messagesController.get('hasSingleSelection')) {
+              var msg = OI.messagesController.get('selection').firstObject() ;
+              window.open(msg.get('s3_html_url'), '_blank') ;
+              // MENTORS
+              // I hope that window.open above causes a state transition; otherwise
+              // I'm concerned about a dead statechart.
+            }
+          },
+
+          markAllAsRead: function() {
+            var selection = SC.SelectionSet.create() ;
+            var messages = OI.mailboxController.get('messages') ;
+            messages.forEach(function(message, index) {
+              if (message.get('isUnread')) {
+                selection.add(messages, index, 1) ;
+              }
+            });
+            if (selection.get('length') > 0) {
+
+              // MENTORS
+              // Should following be CoreOI or OI?
+              CoreOI.markSelectedMessagesAsRead(selection, YES) ;
+            }
+          },
+
+          markAllAsUnread: function() {
+            var selection = SC.SelectionSet.create() ;
+            var messages = OI.mailboxController.get('messages') ;
+            messages.forEach(function(message, index) {
+              if (!message.get('isUnread')) {
+                selection.add(messages, index, 1) ;
+              }
+            });
+            if (selection.get('length') > 0) {
+              CoreOI.markSelectedMessagesAsRead(selection, NO) ;
+            }
+          },
+
+          markSelectedAsRead: function() {
+            var selection = SC.SelectionSet.create() ;
+            var messages = OI.mailboxController.get('messages') ;
+            OI.messagesController.get('selection').forEach(function(message, index) {
+              if (message.get('isUnread')) {
+                selection.add(messages, index, 1) ;
+              }
+            });
+            if (selection.get('length') > 0) {
+              CoreOI.markSelectedMessagesAsRead(selection, YES) ;
+            }
+          },
+
+          markSelectedAsUnread: function() {
+            var selection = SC.SelectionSet.create() ;
+            var messages = OI.mailboxController.get('messages') ;
+            OI.messagesController.get('selection').forEach(function(message, index) {
+              if (!message.get('isUnread')) {
+                selection.add(messages, index, 1) ;
+              }
+            });
+            if (selection.get('length') > 0) {
+              CoreOI.markSelectedMessagesAsRead(selection, NO) ;
+            }
+          },
+
+          deleteAll: function() {
+            var selection = SC.SelectionSet.create() ;
+            var messages = OI.mailboxController.get('messages') ;
+            selection.add(messages, 0, messages.get('length')) ;
+            if (selection.get('length') > 0) {
+              CoreOI.moveSelectedMessagesToFolder(selection, CoreOI.DELETED_FOLDER_ID) ;
+            }            
+          },
+
+          deleteSelected: function() {
+            var selection = OI.messagesController.get('selection') ;
+            if (selection.get('length') > 0) {
+              CoreOI.moveSelectedMessagesToFolder(selection, CoreOI.DELETED_FOLDER_ID) ;
+            }
+          },
+
+          blockAll: function() {
+            var selection = OI.mailboxesController.get('selection') ;
+            if (selection.get('length') === 1) {
+              CoreOI.markMailboxAsBlocked(selection.firstObject(), YES) ;
+            }
+          },
+
+          // MENTORS
+          // The following was commented out originally; I uncommented it.
+          // I'll see if it works or not.
+          unblockAll: function() {
+            var selection = OI.mailboxesController.get('selection') ;
+            if (selection.get('length') === 1) {
+              CoreOI.markMailboxAsBlocked(selection.firstObject(), NO) ;
+            }
+          },
+
+          moveToInbox: function() {
+            var selection = OI.messagesController.get('selection') ;
+            if (selection.get('length') > 0) {
+              CoreOI.moveSelectedMessagesToFolder(selection, CoreOI.INBOX_FOLDER_ID) ;
+            }
+          },
+
+          compose: function() {
+            if (OI.messagesController.get('hasSingleSelection')) {
+              var msg = OI.messagesController.get('selection').firstObject() ;
+              window.open('/messages/new?reference_message_id=%@'.fmt(msg.get('guid')), '_blank') ;
+            } else {
+              window.open('/messages/new', '_blank') ;
+            }
+          },
+
+          reply: function() {
+            if (OI.messagesController.get('hasSingleSelection')) {
+              var msg = OI.messagesController.get('selection').firstObject() ;
+              window.open('/messages/new?reply=true&reference_message_id=%@'.fmt(msg.get('guid')), '_blank') ;
+            }
+          },
+
+          forward: function() {
+            if (OI.messagesController.get('hasSingleSelection')) {
+              var msg = OI.messagesController.get('selection').firstObject() ;
+              window.open('/messages/new?forward=true&reference_message_id=%@'.fmt(msg.get('guid')), '_blank') ;
+            }
+          },
+
+          saveSelected: function() {
+            var selection = OI.messagesController.get('selection') ;
+            if (selection.get('length') > 0) {
+              CoreOI.moveSelectedMessagesToFolder(selection, CoreOI.SAVED_FOLDER_ID) ;
+            }            
+          },
+
+          viewAsPlainText: function() {
+            if (OI.messagesController.get('hasSingleSelection')) {
+              var msg = OI.messagesController.get('selection').firstObject() ;
+              window.open('/messages/%@/plain'.fmt(msg.get('guid')), '_blank') ;
+            }
           },
 
           initSubstate: 'Mailboxes',
@@ -164,7 +337,7 @@ OI.runningStateChart = Ki.Statechart.create({
           Messages: Ki.State.design({
 
             enterState: function() {
-              // alert("entering State 'D2' (Focus>Messages") ;
+              // alert("entering State 'D2' (Focus>Messages)" ;
               OI.bodyPage.get('messageList').becomeFirstResponder() ;
             },
 

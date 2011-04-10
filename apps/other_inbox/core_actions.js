@@ -7,7 +7,13 @@
 /*global OI */
 
 SC.mixin(OI, {
-  
+
+  // MENTORS
+  // What state does this happen in?  Or can I just put it at the top
+  // since by definition it's only invoked when the appropriate state(s)
+  // are current?  Seems like it would be prudent to find the lowest common
+  // state.  I'm guessing state 'D2' (Focus>Messages) would be the appropriate
+  // state to implement this tag in.
   tag: function(tag, enable) {
     alert("OI.tag() is not statechart-enabled. Skipping.") ;
     return ;
@@ -20,287 +26,103 @@ SC.mixin(OI, {
     var ids = sel.map(function(msg) { return msg.get('guid'); }).join(',');  
     OI._batchUpdateMessages({ url: OI.TAG_URL.fmt(ids), tag: tag, method: method });
   },
-  
+
+  // oldfartdeveloper: not implemented yet in OI.runningStateChart
   flushRecords: function() {
     alert("OI.flushRecords() is not statechart-enabled. Skipping.") ;
     return ;
     
     CoreOI.flushRecords() ;
   },
-  
+
+  // MENTORS
+  // Is it a good idea to keep this core_actions class and simply delegate the action
+  // to the state chart as I've done?  Or can the view directly access the statechart?
   openMessage: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          if (OI.messagesController.get('hasSingleSelection')) {
-            var msg = OI.messagesController.get('selection').firstObject() ;
-            window.open(msg.get('s3_html_url'), '_blank') ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('openMessage');
   },
   
   markAllAsRead: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          var selection = SC.SelectionSet.create() ;
-          var messages = OI.mailboxController.get('messages') ;
-          messages.forEach(function(message, index) {
-            if (message.get('isUnread')) {
-              selection.add(messages, index, 1) ;
-            }
-          });
-          if (selection.get('length') > 0) {
-            CoreOI.markSelectedMessagesAsRead(selection, YES) ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('markAllAsRead');
   },
   
-  markAllAsUnread: function() { 
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          var selection = SC.SelectionSet.create() ;
-          var messages = OI.mailboxController.get('messages') ;
-          messages.forEach(function(message, index) {
-            if (!message.get('isUnread')) {
-              selection.add(messages, index, 1) ;
-            }
-          });
-          if (selection.get('length') > 0) {
-            CoreOI.markSelectedMessagesAsRead(selection, NO) ;
-          }
-        }
-      }
-    }
+  markAllAsUnread: function() {
+    OI.runningStateChart.sendEvent('markAllAsUnread');
   },
   
   markSelectedAsRead: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          var selection = SC.SelectionSet.create() ;
-          var messages = OI.mailboxController.get('messages') ;
-          OI.messagesController.get('selection').forEach(function(message, index) {
-            if (message.get('isUnread')) {
-              selection.add(messages, index, 1) ;
-            }
-          });
-          if (selection.get('length') > 0) {
-            CoreOI.markSelectedMessagesAsRead(selection, YES) ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('markSelectedAsRead');
   },
   
   markSelectedAsUnread: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          var selection = SC.SelectionSet.create() ;
-          var messages = OI.mailboxController.get('messages') ;
-          OI.messagesController.get('selection').forEach(function(message, index) {
-            if (!message.get('isUnread')) {
-              selection.add(messages, index, 1) ;
-            }
-          });
-          if (selection.get('length') > 0) {
-            CoreOI.markSelectedMessagesAsRead(selection, NO) ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('markSelectedAsUnread');
   },
   
   deleteAll: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          var selection = SC.SelectionSet.create() ;
-          var messages = OI.mailboxController.get('messages') ;
-          selection.add(messages, 0, messages.get('length')) ;
-          if (selection.get('length') > 0) {
-            CoreOI.moveSelectedMessagesToFolder(selection, CoreOI.DELETED_FOLDER_ID) ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('deleteAll');
   },
   
   deleteSelected: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          var selection = OI.messagesController.get('selection') ;
-          if (selection.get('length') > 0) {
-            CoreOI.moveSelectedMessagesToFolder(selection, CoreOI.DELETED_FOLDER_ID) ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('deleteSelected');
   },
   
   blockAll: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          var selection = OI.mailboxesController.get('selection') ;
-          if (selection.get('length') === 1) {
-            CoreOI.markMailboxAsBlocked(selection.firstObject(), YES) ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('blockAll');
   },
   
-  // unblockAll: function() {
-  //   var state = this.state ;
-  //   if (state.a === 1) {
-  //     if (state.b === 1) {
-  //       if (state.c === 1) {
-  //         var selection = OI.mailboxesController.get('selection') ;
-  //         if (selection.get('length') === 1) {
-  //           CoreOI.markMailboxAsBlocked(selection.firstObject(), NO) ;
-  //         }
-  //       }
-  //     }
-  //   }
-  // },
+  unblockAll: function() {
+    OI.runningStateChart.sendEvent('unblockAll');
+  },
   
   moveToInbox: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          var selection = OI.messagesController.get('selection') ;
-          if (selection.get('length') > 0) {
-            CoreOI.moveSelectedMessagesToFolder(selection, CoreOI.INBOX_FOLDER_ID) ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('moveToInbox');
   },
   
   compose: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          if (OI.messagesController.get('hasSingleSelection')) {
-            var msg = OI.messagesController.get('selection').firstObject() ;
-            window.open('/messages/new?reference_message_id=%@'.fmt(msg.get('guid')), '_blank') ;
-          } else {
-            window.open('/messages/new', '_blank') ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('compose');
   },
   
   reply: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          if (OI.messagesController.get('hasSingleSelection')) {
-            var msg = OI.messagesController.get('selection').firstObject() ;
-            window.open('/messages/new?reply=true&reference_message_id=%@'.fmt(msg.get('guid')), '_blank') ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('reply');
   },
   
   forward: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          if (OI.messagesController.get('hasSingleSelection')) {
-            var msg = OI.messagesController.get('selection').firstObject() ;
-            window.open('/messages/new?forward=true&reference_message_id=%@'.fmt(msg.get('guid')), '_blank') ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('forward');
   },
   
   openMessages: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        OI.goState('c', 1) ;
-        OI.goState('d', 1) ;
-        OI.goState('e', 1) ;
-      }
-    }
+
+    // MENTOR
+    // Am counting on initSubstate() to descend to the
+    // final substate 'ExamineFolderMailboxes'.  Is this a good idea,
+    // or should I directly go to state 'ExamineFolderMailboxes' and
+    // count on Ki to descend and run through any functionality in the ExamineFolderMailboxes'
+    // parents' initial substates?
+    OI.runningStateChart.gotoState('Focus');
   },
   
   openCalendar: function() {
-    if (OIState === 'Running') {
-      window.open('/calendars', '_self') ;
-    }
+    OI.runningStateChart.sendEvent('openCalendar');
   },
   
   openReceipts: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (CoreOI.get('user').subscribesTo("ParsingService")) {
-        window.open('/receipts', '_self') ;
-      } else {
-        CoreOI.makeComingSoonFlash() ;
-      }
-    }
+    OI.runningStateChart.sendEvent('openReceipts');
   },
   
   openSettings: function() {
-    if (OIState === 'Running') {
-      window.open('/identity','_self') ;
-    }
+    OI.runningStateChart.sendEvent('openSettings');
   },
   
   saveSelected: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          var selection = OI.messagesController.get('selection') ;
-          if (selection.get('length') > 0) {
-            CoreOI.moveSelectedMessagesToFolder(selection, CoreOI.SAVED_FOLDER_ID) ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('saveSelected');
   },
   
   viewAsPlainText: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        if (state.c === 1) {
-          if (OI.messagesController.get('hasSingleSelection')) {
-            var msg = OI.messagesController.get('selection').firstObject() ;
-            window.open('/messages/%@/plain'.fmt(msg.get('guid')), '_blank') ;
-          }
-        }
-      }
-    }
+    OI.runningStateChart.sendEvent('viewAsPlainText');
   },
   
   goToSignIn: function() {
+    // oldfartdeveloper: not included in statechart yet.
     alert("OI.goToSignIn() is not statechart-enabled. Skipping.") ;
     return ;
     
@@ -312,35 +134,19 @@ SC.mixin(OI, {
   },
   
   newMailbox: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        window.open('/mailboxes/new', '_blank') ;
-      }
-    }
+    OI.runningStateChart.sendEvent('newMailbox');
   },
   
   openAdmin: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      window.open('/admin', '_self') ;
-    }
+    OI.runningStateChart.sendEvent('openAdmin');
   },
   
   makeNewInvitation: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      if (state.b === 1) {
-        window.open('/invitations/new', '_blank', "height=430,width=796,status=no") ;
-      }
-    }
+    OI.runningStateChart.sendEvent('makeNewInvitation');
   },
   
   openHelp: function() {
-    var state = this.state ;
-    if (state.a === 1) {
-      window.open('http://help.otherinbox.com/', '_blank') ;
-    }
+    OI.runningStateChart.sendEvent('openHelp');
   }
   
   // undo: function() {
