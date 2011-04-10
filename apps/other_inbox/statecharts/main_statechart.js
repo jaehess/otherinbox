@@ -16,6 +16,13 @@
 // me know if I have this wrong.
 //
 // Next am going to flesh out events
+
+/**
+ * While the application is loading, a much smaller custom statechart is used.  When
+ * that process completes, the application is ready and put into the running state.
+ * @return the statechart to manage the application's running state as described
+ * in the document Statechart.graffle in folder 'design'.
+ */
 OI.runningStateChart = Ki.Statechart.create({
 
   rootState: Ki.State.design({
