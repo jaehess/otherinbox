@@ -43,7 +43,7 @@ OI.runningStateChart = Ki.Statechart.create({
     /**
      * A1
      */
-    Application: Ki.State.design({
+    "Application": Ki.State.design({
 
       enterState: function() {
 
@@ -79,7 +79,7 @@ OI.runningStateChart = Ki.Statechart.create({
       /**
        * B1
        */
-      Messages: Ki.State.design({
+      "Messages": Ki.State.design({
 
         enterState: function() {
           // document.title is handled by the updateChrome() method:
@@ -253,7 +253,7 @@ OI.runningStateChart = Ki.Statechart.create({
           /**
            * D1
            */
-          Mailboxes: Ki.State.design({
+          "Mailboxes": Ki.State.design({
 
             enterState: function() {
               // alert("entering goStateD1") ;
@@ -265,7 +265,7 @@ OI.runningStateChart = Ki.Statechart.create({
             /**
              * E1 (transient state)
              */
-            ExamineFolderMailboxes: Ki.State.design({
+            "ExamineFolderMailboxes": Ki.State.design({
 
               enterState: function() {
                   // var mailboxes = this.folderController.get('mailboxes') ;
@@ -299,7 +299,7 @@ OI.runningStateChart = Ki.Statechart.create({
             /**
              * E2
              */
-            LoadingMailboxes: Ki.State.design({
+            "LoadingMailboxes": Ki.State.design({
 
               enterState: function() {
                 alert("State 'E2' (LoadingMailBoxes) not implemented.") ;
@@ -310,7 +310,7 @@ OI.runningStateChart = Ki.Statechart.create({
             /**
              * E3
              */
-            FolderHasNoMailboxes: Ki.State.design({
+            "FolderHasNoMailboxes": Ki.State.design({
 
               enterState: function() {
                 alert("State 'E3' (FolderHasNoMailboxes) not implemented.") ;
@@ -321,7 +321,7 @@ OI.runningStateChart = Ki.Statechart.create({
             /**
              * E4
              */
-            MailboxSelected: Ki.State.design({
+            "MailboxSelected": Ki.State.design({
 
               enterState: function() {
                 alert("State 'E4' (MailboxSelected) not implemented.") ;
@@ -334,7 +334,7 @@ OI.runningStateChart = Ki.Statechart.create({
           /**
            * D2
            */
-          Messages: Ki.State.design({
+          "Messages": Ki.State.design({
 
             enterState: function() {
               // alert("entering State 'D2' (Focus>Messages)" ;
@@ -346,7 +346,7 @@ OI.runningStateChart = Ki.Statechart.create({
             /**
              * F1 (transient)
              */
-            ExamineMailboxMessages: Ki.State.design({
+            "ExamineMailboxMessages": Ki.State.design({
 
               enterState: function() {
                 // var messages = this.mailboxController.get('messages') ;
@@ -412,7 +412,7 @@ OI.runningStateChart = Ki.Statechart.create({
             /**
              * F2
              */
-            LoadingMessages: Ki.State.design({
+            "LoadingMessages": Ki.State.design({
 
               enterState: function() {
                 alert("State 'F2' (LoadingMessages) not implemented.") ;
@@ -423,7 +423,7 @@ OI.runningStateChart = Ki.Statechart.create({
             /**
              * F3
              */
-            NoSelection: Ki.State.design({
+            "NoSelection": Ki.State.design({
 
               enterState: function() {
                 alert("State 'F3' (NoSelection) not implemented.") ;
@@ -434,7 +434,7 @@ OI.runningStateChart = Ki.Statechart.create({
             /**
              * F4
              */
-            MessageSelected: Ki.State.design({
+            "MessageSelected": Ki.State.design({
 
               enterState: function() {
                 console.log("State 'F4' (MessageSelected) not implemented.") ;
@@ -449,7 +449,7 @@ OI.runningStateChart = Ki.Statechart.create({
         /**
          * C2
          */
-        Reload: Ki.State.design({
+        "Reload": Ki.State.design({
 
           enterState: function() {
             alert("State 'C2' (Reload) not implemented.") ;
@@ -460,7 +460,7 @@ OI.runningStateChart = Ki.Statechart.create({
         /**
          * C3
          */
-        Error: Ki.State.design({
+        "Error": Ki.State.design({
 
           enterState: function() {
             alert("State 'C3' (Error) not implemented.") ;
@@ -471,7 +471,7 @@ OI.runningStateChart = Ki.Statechart.create({
         /**
          * C4
          */
-        Mailbox: Ki.State.design({
+        "Mailbox": Ki.State.design({
 
           enterState: function() {
             alert("State 'C4' (Mailbox) (drag) not implemented.") ;
@@ -482,7 +482,7 @@ OI.runningStateChart = Ki.Statechart.create({
         /**
          * C5
          */
-        Messages: Ki.State.design({
+        "Messages": Ki.State.design({
 
           enterState: function() {
             alert("State 'C5' (Messages) (drag) not implemented.") ;
@@ -496,7 +496,7 @@ OI.runningStateChart = Ki.Statechart.create({
       /**
        * B2
        */
-      Receipts: Ki.State.design({
+      "Receipts": Ki.State.design({
 
         enterState: function() {
           document.title = "_OtherInbox - Receipts".loc() ;
@@ -508,7 +508,7 @@ OI.runningStateChart = Ki.Statechart.create({
       /**
        * B3
        */
-      Coupons: Ki.State.design({
+      "Coupons": Ki.State.design({
 
         enterState: function() {
           document.title = "_OtherInbox - Receipts".loc() ;
@@ -520,7 +520,7 @@ OI.runningStateChart = Ki.Statechart.create({
       /**
        * B4
        */
-      Calendar: Ki.State.design({
+      "Calendar": Ki.State.design({
 
         enterState: function() {
           document.title = "_OtherInbox - Calendar".loc() ;
@@ -534,7 +534,7 @@ OI.runningStateChart = Ki.Statechart.create({
     /**
      * A2
      */
-    SignOut: Ki.State.design({
+    "SignOut": Ki.State.design({
 
       enterState: function() {
         document.title = "_OtherInbox - Sign Out".loc() ;
