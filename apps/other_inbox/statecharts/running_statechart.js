@@ -95,7 +95,7 @@ OI.runningStateChart = Ki.Statechart.create({
         /**
          * C1
          */
-        Focus: Ki.State.design({
+        "Focus": Ki.State.design({
 
           // MENTORS
           // If there is nothing to do in a parent enter-state, won't control
