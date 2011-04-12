@@ -40,9 +40,6 @@ OI.runningStateChart = Ki.Statechart.create({
       window.open('/identity','_self') ;
     },
 
-    /**
-     * A1
-     */
     "Application": Ki.State.design({
 
       enterState: function() {
@@ -76,9 +73,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
       initialSubstate: 'Messages',
 
-      /**
-       * B1
-       */
       "Messages": Ki.State.design({
 
         enterState: function() {
@@ -92,9 +86,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
         initialSubstate: 'Focus',
 
-        /**
-         * C1
-         */
         "Focus": Ki.State.design({
 
           // MENTORS
@@ -250,9 +241,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
           initialSubstate: 'Mailboxes',
 
-          /**
-           * D1
-           */
           "Mailboxes": Ki.State.design({
 
             enterState: function() {
@@ -262,9 +250,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
             initialSubstate: 'ExamineFolderMailboxes',
 
-            /**
-             * E1 (transient state)
-             */
             "ExamineFolderMailboxes": Ki.State.design({
 
               enterState: function() {
@@ -296,9 +281,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
             }),
 
-            /**
-             * E2
-             */
             "LoadingMailboxes": Ki.State.design({
 
               enterState: function() {
@@ -307,9 +289,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
             }),
 
-            /**
-             * E3
-             */
             "FolderHasNoMailboxes": Ki.State.design({
 
               enterState: function() {
@@ -318,9 +297,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
             }),
 
-            /**
-             * E4
-             */
             "MailboxSelected": Ki.State.design({
 
               enterState: function() {
@@ -331,9 +307,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
           }),
 
-          /**
-           * D2
-           */
           "Messages": Ki.State.design({
 
             enterState: function() {
@@ -341,11 +314,29 @@ OI.runningStateChart = Ki.Statechart.create({
               OI.bodyPage.get('messageList').becomeFirstResponder() ;
             },
 
+            collectionViewSelectionForProposedSelection: function(view, sel) {
+              // var state = this.state ;
+              if (view === OI.bodyPage.get('messageList')) {
+                // if (state.a === 1) {
+                //   if (state.b === 1) {
+                //     if (state.c === 1) {
+                //       if (state.d === 2) {
+                        if (sel.get('length') === 1) {
+                          var obj = sel.firstObject() ;
+                          if (obj.get('isUnread')) {
+                              CoreOI.markSelectedMessagesAsRead(sel, YES) ;
+                          }
+                        }
+                  //     }
+                  //   }
+                  // }
+                }
+              // }
+              return sel ; // always allow selections
+            },
+
             initialSubstate: 'ExamineMailboxMessages',
 
-            /**
-             * F1 (transient)
-             */
             "ExamineMailboxMessages": Ki.State.design({
 
               enterState: function() {
@@ -409,9 +400,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
             }),
 
-            /**
-             * F2
-             */
             "LoadingMessages": Ki.State.design({
 
               enterState: function() {
@@ -420,9 +408,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
             }),
 
-            /**
-             * F3
-             */
             "NoSelection": Ki.State.design({
 
               enterState: function() {
@@ -431,9 +416,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
             }),
 
-            /**
-             * F4
-             */
             "MessageSelected": Ki.State.design({
 
               enterState: function() {
@@ -446,9 +428,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
         }),
 
-        /**
-         * C2
-         */
         "Reload": Ki.State.design({
 
           enterState: function() {
@@ -457,9 +436,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
         }),
 
-        /**
-         * C3
-         */
         "Error": Ki.State.design({
 
           enterState: function() {
@@ -468,9 +444,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
         }),
 
-        /**
-         * C4
-         */
         "Mailbox": Ki.State.design({
 
           enterState: function() {
@@ -479,9 +452,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
         }),
 
-        /**
-         * C5
-         */
         "Messages": Ki.State.design({
 
           enterState: function() {
@@ -493,9 +463,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
       }),
 
-      /**
-       * B2
-       */
       "Receipts": Ki.State.design({
 
         enterState: function() {
@@ -505,9 +472,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
       }),
 
-      /**
-       * B3
-       */
       "Coupons": Ki.State.design({
 
         enterState: function() {
@@ -517,9 +481,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
       }),
 
-      /**
-       * B4
-       */
       "Calendar": Ki.State.design({
 
         enterState: function() {
@@ -531,9 +492,6 @@ OI.runningStateChart = Ki.Statechart.create({
 
     }),
 
-    /**
-     * A2
-     */
     "SignOut": Ki.State.design({
 
       enterState: function() {
