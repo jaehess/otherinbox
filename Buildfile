@@ -95,7 +95,7 @@ config :core_oi do |c|
 end
 
 config :other_inbox do |c|
-	c[:required] = %w(sproutcore core_oi)
+	c[:required] = %w(sproutcore ki core_oi)
 end
 
 config :store_tester do |c|
