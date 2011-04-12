@@ -90,7 +90,7 @@ OI.runningStateChart = Ki.Statechart.create({
           window.open('/mailboxes/new', '_blank') ;
         },
 
-        initSubstate: 'Focus',
+        initialSubstate: 'Focus',
 
         /**
          * C1
@@ -248,7 +248,7 @@ OI.runningStateChart = Ki.Statechart.create({
             }
           },
 
-          initSubstate: 'Mailboxes',
+          initialSubstate: 'Mailboxes',
 
           /**
            * D1
@@ -260,7 +260,7 @@ OI.runningStateChart = Ki.Statechart.create({
               OI.bodyPage.get('mailboxList').becomeFirstResponder() ;
             },
 
-            initSubstate: 'ExamineFolderMailboxes',
+            initialSubstate: 'ExamineFolderMailboxes',
 
             /**
              * E1 (transient state)
@@ -341,7 +341,7 @@ OI.runningStateChart = Ki.Statechart.create({
               OI.bodyPage.get('messageList').becomeFirstResponder() ;
             },
 
-            initSubstate: 'ExamineMailboxMessages',
+            initialSubstate: 'ExamineMailboxMessages',
 
             /**
              * F1 (transient)
@@ -552,4 +552,3 @@ OI.runningStateChart = Ki.Statechart.create({
   })
 
 });
-
