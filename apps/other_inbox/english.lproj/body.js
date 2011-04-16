@@ -89,7 +89,7 @@ OI.bodyPage = SC.Page.design({
             layout: { top: 0, bottom: 0, left: 0, width: 72 },
             isSelected: YES,
             title: "Messages",
-            target: OI.runningStateChart,
+            target: 'OI.runningStateChart',
             action: 'openMessages'
           }),
           
@@ -98,14 +98,14 @@ OI.bodyPage = SC.Page.design({
             layout: { top: 0, bottom: 0, left: 72, width: 72 },
             title: "Receipts",
             action: 'openReceipts',
-            target: OI.runningStateChart
+            target: 'OI.runningStateChart'
           }),
           
           coupons: OI.ToolbarButtonView.design({
             layerId: 'coupons_button',
             layout: { top: 0, bottom: 0, left: 144, width: 72 },
             title: "Coupons",
-            action: 'makeComingSoonFlash'
+            target: 'OI.runningStateChart', action: 'makeComingSoonFlash'
           }),
           
           calendar: OI.ToolbarButtonView.design({
@@ -113,14 +113,14 @@ OI.bodyPage = SC.Page.design({
             layout: { top: 0, bottom: 0, left: 216, width: 72 },
             title: "Calendar",
             action: 'openCalendar',
-            target: OI.runningStateChart
+            target: 'OI.runningStateChart'
           }),
           
           help: OI.ToolbarButtonView.design({
             layerId: 'help_button',
             layout: { top: 0, bottom: 0, left: 288, width: 72 },
             title: "Help",
-            target: OI.runningStateChart, action: 'openHelp'
+            target: 'OI.runningStateChart', action: 'openHelp'
           }),
           
           settings: OI.ToolbarButtonView.design({
@@ -128,7 +128,7 @@ OI.bodyPage = SC.Page.design({
             layout: { top: 0, bottom: 0, left: 360, width: 72 },
             title: "Settings",
             action: 'openSettings',
-            target: OI.runningStateChart
+            target: 'OI.runningStateChart'
           })
         })
       }),
@@ -292,7 +292,7 @@ OI.bodyPage = SC.Page.design({
                         useStaticLayout: YES,
                         layout: { width: 143, height: 36 },
                         title: "Mark All As Read",
-                        target: OI.runningStatechart, action: 'markAllAsRead',
+                        target: 'OI.runningStateChart', action: 'markAllAsRead',
                         isEnabledBinding: SC.Binding.bool('OI*messagesController.length').oneWay(),
                         isVisibleBinding: SC.Binding.bool('OI.mailboxController.unreadCount').oneWay()
                       }),
@@ -302,7 +302,7 @@ OI.bodyPage = SC.Page.design({
                         useStaticLayout: YES,
                         layout: { width: 160, height: 36 },
                         title: "Mark All As Unread",
-                        target: OI.runningStatechart, action: 'markAllAsUnread',
+                        target: 'OI.runningStateChart', action: 'markAllAsUnread',
                         isEnabledBinding: SC.Binding.bool('OI*messagesController.length').oneWay(),
                         isVisibleBinding: SC.Binding.not('OI.mailboxController.unreadCount').oneWay()
                       }),
@@ -312,7 +312,7 @@ OI.bodyPage = SC.Page.design({
                         useStaticLayout: YES,
                         layout: { width: 97, height: 36 },
                         title: "Delete All",
-                        target: OI.runningStatechart, action: 'deleteAll',
+                        target: 'OI.runningStateChart', action: 'deleteAll',
                         isVisibleBinding: SC.Binding.bool('OI.folderController.isDeleteable').oneWay(),
                         isEnabledBinding: SC.Binding.bool('OI*messagesController.length').oneWay()
                       }),
@@ -322,7 +322,7 @@ OI.bodyPage = SC.Page.design({
                         useStaticLayout: YES,
                         layout: { width: 122, height: 36 },
                         title: "Block Mailbox",
-                        target: OI.runningStatechart, action: 'blockAll',
+                        target: 'OI.runningStateChart', action: 'blockAll',
                         isVisibleBinding: SC.Binding.bool('OI.folderController.isBlockable').oneWay(),
                         isEnabledBinding: SC.Binding.bool('OI*messagesController.length').oneWay()
                       }),
@@ -332,7 +332,7 @@ OI.bodyPage = SC.Page.design({
                         useStaticLayout: YES,
                         layout: { width: 139, height: 36 },
                         title: "Unblock Mailbox",
-                        target: OI.runningStatechart, action: 'unblockAll',
+                        target: 'OI.runningStateChart', action: 'unblockAll',
                         isVisible: NO,
                         // isVisibleBinding: SC.Binding.not('OI.folderController.isBlockable').oneWay(),
                         isEnabledBinding: SC.Binding.bool('OI*messagesController.length').oneWay()
@@ -343,7 +343,7 @@ OI.bodyPage = SC.Page.design({
                         useStaticLayout: YES,
                         layout: { width: 72, height: 36 },
                         title: "Undo",
-                        target: OI.runningStatechart, action: 'undo',
+                        target: 'OI.runningStateChart', action: 'undo',
                         isVisible: NO,
                         isEnabled: YES
                       })
@@ -404,7 +404,7 @@ OI.bodyPage = SC.Page.design({
                           useStaticLayout: YES,
                           layout: { width: 68, height: 36 },
                           title: 'Save',
-                          target: OI.runningStatechart, action: 'saveSelected',
+                          target: 'OI.runningStateChart', action: 'saveSelected',
                           useStaticLayout: YES,
                           isEnabledBinding: SC.Binding.bool('OI.folderController.isSaveable').oneWay()
                         }),
@@ -415,7 +415,7 @@ OI.bodyPage = SC.Page.design({
                           useStaticLayout: YES,
                           layout: { width: 73, height: 36 },
                           title: 'Reply',
-                          target: OI.runningStatechart, action: 'reply',
+                          target: 'OI.runningStateChart', action: 'reply',
                           isEnabledBinding: SC.Binding.bool('OI*messagesController.hasSingleSelection').oneWay()
                         }),
                         
@@ -425,7 +425,7 @@ OI.bodyPage = SC.Page.design({
                           useStaticLayout: YES,
                           layout: { width: 86, height: 36 },
                           title: 'Forward',
-                          target: OI.runningStatechart, action: 'forward',
+                          target: 'OI.runningStateChart', action: 'forward',
                           isEnabledBinding: SC.Binding.bool('OI*messagesController.hasSingleSelection').oneWay()
                         }),
                         
@@ -436,7 +436,7 @@ OI.bodyPage = SC.Page.design({
                           useStaticLayout: YES,
                           layout: { width: 77, height: 36 },
                           title: 'Delete',
-                          target: OI.runningStatechart, action: 'deleteSelected',
+                          target: 'OI.runningStateChart', action: 'deleteSelected',
                           isEnabledBinding: SC.Binding.bool('OI.folderController.isDeleteable').oneWay()
                         }),
                         
@@ -446,7 +446,7 @@ OI.bodyPage = SC.Page.design({
                           useStaticLayout: YES,
                           layout: { width: 121, height: 36 },
                           title: 'Mark As Read',
-                          target: OI.runningStatechart, action: 'markSelectedAsRead',
+                          target: 'OI.runningStateChart', action: 'markSelectedAsRead',
                           isEnabledBinding: SC.Binding.bool('OI*messagesController.hasSelection').oneWay(),
                           isVisibleBinding: SC.Binding.bool('OI*messagesController.someSelectedUnread').oneWay()
                         }),
@@ -457,7 +457,7 @@ OI.bodyPage = SC.Page.design({
                           useStaticLayout: YES,
                           layout: { width: 134, height: 36 },
                           title: 'Mark As Unread',
-                          target: OI.runningStatechart, action: 'markSelectedAsUnread',
+                          target: 'OI.runningStateChart', action: 'markSelectedAsUnread',
                           isEnabledBinding: SC.Binding.bool('OI*messagesController.hasSelection').oneWay(),
                           isVisibleBinding: SC.Binding.bool('OI*messagesController.noneSelectedUnread').oneWay()
                         }),
@@ -468,7 +468,7 @@ OI.bodyPage = SC.Page.design({
                           useStaticLayout: YES,
                           layout: { width: 123, height: 36 },
                           title: 'Move to Inbox',
-                          target: OI.runningStatechart, action: 'moveToInbox',
+                          target: 'OI.runningStateChart', action: 'moveToInbox',
                           isEnabledBinding: SC.Binding.bool('OI*messagesController.hasSelection').oneWay(),
                           isVisibleBinding: SC.Binding.bool('OI.folderController.isInboxable').oneWay()
                         }),
@@ -479,7 +479,7 @@ OI.bodyPage = SC.Page.design({
                           useStaticLayout: YES,
                           layout: { width: 67, height: 36 },
                           title: 'Print',
-                          target: OI.runningStatechart, action: 'openMessage',
+                          target: 'OI.runningStateChart', action: 'openMessage',
                           isEnabledBinding: SC.Binding.bool('OI*messagesController.hasSingleSelection').oneWay()
                         }),
                         
@@ -489,7 +489,7 @@ OI.bodyPage = SC.Page.design({
                           useStaticLayout: YES,
                           layout: { width: 151, height: 36 },
                           title: 'View Raw Message',
-                          target: OI.runningStatechart, action: 'viewAsPlainText',
+                          target: 'OI.runningStateChart', action: 'viewAsPlainText',
                           isEnabledBinding: SC.Binding.bool('OI*messagesController.hasSingleSelection').oneWay()
                         }),
                         
@@ -603,7 +603,7 @@ OI.bodyPage = SC.Page.design({
             classNames: 'compose-button',
             layout: { left:8, bottom:6, height:24, width:130 },
             title: "New message",
-            target: OI.runningStatechart,
+            target: 'OI.runningStateChart',
             action: 'compose'
           }),
           
@@ -612,7 +612,7 @@ OI.bodyPage = SC.Page.design({
             classNames: 'new-mailbox',
             layout: { left:136, bottom:6, height:24, width:130 },
             title: "New mailbox",
-            target: OI.runningStatechart,
+            target: 'OI.runningStateChart',
             action: 'newMailbox'
           }),
           
@@ -621,7 +621,7 @@ OI.bodyPage = SC.Page.design({
             classNames: 'invite-friends',
             layout: { right:28, bottom:7, height:18, width:114 },
             title: "Invite Friends",
-            target: OI.runningStatechart,
+            target: 'OI.runningStateChart',
             action: 'makeNewInvitation'
           })
         })
