@@ -14,7 +14,7 @@ Presently the application doesn't work very well yet (on this branch); however y
 # Prerequisites
 
 - Has been tested under Ruby 1.9.2-p136.
-- Has been tested under SproutCore gem sproutcore version 1.5.0.pre.5
+- Has been tested under SproutCore gem sproutcore version 1.5.0.rc.2
 - I develop under OSX 10.6.8.  On other systems, YMMV.
 
 # Pre-installation
@@ -28,7 +28,7 @@ Here's how:
         $ rvm install ruby-1.9.2-p136
         $ rvm gemset create otherinbox
         $ rvm gemset use otherinbox
-        $ gem install sproutcore -v 1.5.0.pre.5
+        $ gem install sproutcore -v 1.5.0.rc.2
 
 The last command will take several minutes.
 
