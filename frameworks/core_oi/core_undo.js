@@ -13,7 +13,7 @@ SC.mixin(CoreOI, {
   pushUndo: function(url, options, method) {
     // MENTORS
     // I'd like to take this on.  Maybe a quick session on how this worked at one time?
-    alert("CoreOI.pushUndo() is not statechart-enabled. Skipping.") ;
+    console.warn("CoreOI.pushUndo() is not statechart-enabled. Skipping.") ;
     return ;
     
     var options = SC.clone(options) ;
