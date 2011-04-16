@@ -61,7 +61,7 @@ OI.MessageListView = SC.ListView.extend(
     var view = this.itemViewForEvent(ev);
 
     if (view && content) {
-      OI.openMessage();
+      OI.runningStateChart.openMessage();
       return true;
     } else {
       return false;

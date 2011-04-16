@@ -8,22 +8,10 @@
 // Date: 4/9/11
 // Time: 12:30 PM
 
-// MENTORS
-// Here's my translation of the state chart defined in the graffle.
-// I presume I have the naming right, i.e. use the more descriptive
-// name as the state name and the '<letter><digit>' in the comment; let
-// me know if I have this wrong.
-//
-// MENTORS
-// I've flushed out the functionality when entering the state by
-// exactly plagiarizing the enter-state behavior defined by core.js.  It feels correct,
-// but I haven't tested it yet.  Am I on the right track here?  I realize that I still
-// have to connect events which I'll do next.
-
 /**
  * While the application is loading, a much smaller custom statechart is used.  When
  * that process completes, the application is ready and put into the running state.
- * @return the statechart to manage the application's running state as described
+ * @return the statechart to manage the application's "running" state as described
  * in the document Statechart.graffle in folder 'design'.
  */
 OI.runningStateChart = Ki.Statechart.create({
@@ -38,6 +26,22 @@ OI.runningStateChart = Ki.Statechart.create({
 
     openSettings: function() {
       window.open('/identity','_self') ;
+    },
+
+    /**
+     * MENTORS
+     * This probably needs a more specific state, but I'm not sure yet.
+     */
+    goToSignIn: function() {
+      // oldfartdeveloper: not included in statechart yet.
+      alert("OI.goToSignIn() is not statechart-enabled. Skipping.") ;
+      return ;
+
+      if (CoreOI.serverMode) {
+        window.open('/signin','_self');
+      } else {
+        console.info("Signed out") ;
+      }
     },
 
     "Application": Ki.State.design({
@@ -71,6 +75,25 @@ OI.runningStateChart = Ki.Statechart.create({
         window.open('http://help.otherinbox.com/', '_blank') ;
       },
 
+      // MENTORS
+      // This correct state?  Figured it can go into application state.
+      undo: function() {
+         alert("OI.undo() calls the statechart but isn't yet implemented. Skipping.") ;
+         return ;
+        // TODO get undo manager working again, preferably use the built-in manager not our custom one
+         CoreOI.undo() ;
+      },
+
+      // oldfartdeveloper: not implemented yet in OI.runningStateChart
+      flushRecords: function() {
+        // MENTORS
+        // I'm letting CoreOI.flushRecords have a go at this; see what happens.
+//        alert("OI.flushRecords() is statechart-enabled. Skipping.") ;
+//        return ;
+
+        CoreOI.flushRecords() ;
+      },
+
       initialSubstate: 'Messages',
 
       "Messages": Ki.State.design({
@@ -87,15 +110,6 @@ OI.runningStateChart = Ki.Statechart.create({
         initialSubstate: 'Focus',
 
         "Focus": Ki.State.design({
-
-          // MENTORS
-          // If there is nothing to do in a parent enter-state, won't control
-          // automatically pass through to the default child substate specified in initSubstate?
-          // Hence: in this place is there any reason for this enterState function
-          // to be implemented?  Or can I remove it?
-          enterState: function() {
-            // alert("State 'C1' (Focus) not implemented.") ;
-          },
 
           openMessage: function() {
             if (OI.messagesController.get('hasSingleSelection')) {
@@ -315,23 +329,14 @@ OI.runningStateChart = Ki.Statechart.create({
             },
 
             collectionViewSelectionForProposedSelection: function(view, sel) {
-              // var state = this.state ;
               if (view === OI.bodyPage.get('messageList')) {
-                // if (state.a === 1) {
-                //   if (state.b === 1) {
-                //     if (state.c === 1) {
-                //       if (state.d === 2) {
-                        if (sel.get('length') === 1) {
-                          var obj = sel.firstObject() ;
-                          if (obj.get('isUnread')) {
-                              CoreOI.markSelectedMessagesAsRead(sel, YES) ;
-                          }
-                        }
-                  //     }
-                  //   }
-                  // }
+                if (sel.get('length') === 1) {
+                  var obj = sel.firstObject() ;
+                  if (obj.get('isUnread')) {
+                      CoreOI.markSelectedMessagesAsRead(sel, YES) ;
+                  }
                 }
-              // }
+              }
               return sel ; // always allow selections
             },
 
@@ -420,7 +425,24 @@ OI.runningStateChart = Ki.Statechart.create({
 
               enterState: function() {
                 console.log("State 'F4' (MessageSelected) not implemented.") ;
+              },
+
+              // MENTORS
+              // The arguments don't match the call from body.js.  Any idea
+              // what they should be?
+              tag: function(tag, enable) {
+                alert("OI.tag() is not statechart-enabled. Skipping.") ;
+                return ;
+
+                var sel = OI.messagesController.get('selection');
+                if (!sel || sel.get('length') < 1) { return; }
+
+                var method = enable ? "post" : "delete";
+
+                var ids = sel.map(function(msg) { return msg.get('guid'); }).join(',');
+                OI._batchUpdateMessages({ url: OI.TAG_URL.fmt(ids), tag: tag, method: method });
               }
+
 
             })
 

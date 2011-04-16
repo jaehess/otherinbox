@@ -17,6 +17,5 @@ module("Folder controller",{
 test("pushUndo",function(){
        OI.folderController.set('content',inbox);
        CoreOI.pushUndo('/example',{foo:'bar'},'post',{});
-       ok(OI.undoManager.undoStack.actions.length>0,
-	  "There should be something on the undo stack");
+       ok(OI.undoManager.undoStack.actions.length>0, "There should be something on the undo stack");
      });

@@ -282,7 +282,9 @@ SC.mixin(CoreOI, {
   },
   
   flushRecords: function() {
-    alert("CoreOI.flushRecords() is not statechart-enabled. Skipping.") ;
+    // MENTORS
+    // This is now called by the statechart.  What's the best way to implement this?
+    alert("CoreOI.flushRecords() is now called by statechart. Doesn't appear to be implemeented.  Skipping.") ;
     return ;
   },
   

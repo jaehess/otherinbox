@@ -89,6 +89,7 @@ OI.bodyPage = SC.Page.design({
             layout: { top: 0, bottom: 0, left: 0, width: 72 },
             isSelected: YES,
             title: "Messages",
+            target: OI.runningStateChart,
             action: 'openMessages'
           }),
           
@@ -96,7 +97,8 @@ OI.bodyPage = SC.Page.design({
             layerId: 'receipts_button',
             layout: { top: 0, bottom: 0, left: 72, width: 72 },
             title: "Receipts",
-            action: 'openReceipts'
+            action: 'openReceipts',
+            target: OI.runningStateChart
           }),
           
           coupons: OI.ToolbarButtonView.design({
@@ -110,21 +112,23 @@ OI.bodyPage = SC.Page.design({
             layerId: 'calendar_button',
             layout: { top: 0, bottom: 0, left: 216, width: 72 },
             title: "Calendar",
-            action: 'openCalendar'
+            action: 'openCalendar',
+            target: OI.runningStateChart
           }),
           
           help: OI.ToolbarButtonView.design({
             layerId: 'help_button',
             layout: { top: 0, bottom: 0, left: 288, width: 72 },
             title: "Help",
-            action: 'openHelp'
+            target: OI.runningStateChart, action: 'openHelp'
           }),
           
           settings: OI.ToolbarButtonView.design({
             layerId: 'settings_button',
             layout: { top: 0, bottom: 0, left: 360, width: 72 },
             title: "Settings",
-            action: 'openSettings'
+            action: 'openSettings',
+            target: OI.runningStateChart
           })
         })
       }),
@@ -341,7 +345,7 @@ OI.bodyPage = SC.Page.design({
                         title: "Undo",
                         target: OI.runningStatechart, action: 'undo',
                         isVisible: NO,
-                        isEnabled: NO // TODO get undo manager working again, preferably use the built-in manager not our custom one
+                        isEnabled: YES
                       })
                     }),
                     

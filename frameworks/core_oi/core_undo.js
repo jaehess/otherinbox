@@ -11,6 +11,8 @@ SC.mixin(CoreOI, {
   undoManager: SC.UndoManager.create(),
   
   pushUndo: function(url, options, method) {
+    // MENTORS
+    // I'd like to take this on.  Maybe a quick session on how this worked at one time?
     alert("CoreOI.pushUndo() is not statechart-enabled. Skipping.") ;
     return ;
     
