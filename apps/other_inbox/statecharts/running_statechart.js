@@ -424,7 +424,7 @@ OI.runningStateChart = Ki.Statechart.create({
             "MessageSelected": Ki.State.design({
 
               enterState: function() {
-                console.log("State 'F4' (MessageSelected) not implemented.") ;
+                alert("MessageSelected not implemented");
               },
 
               // MENTORS
