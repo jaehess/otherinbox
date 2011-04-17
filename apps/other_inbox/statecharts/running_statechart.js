@@ -16,6 +16,8 @@
  */
 OI.runningStatechart = Ki.Statechart.create({
 
+  trace: true,
+
   rootState: Ki.State.design({
 
     initialSubstate: 'Application',
@@ -274,7 +276,6 @@ OI.runningStatechart = Ki.Statechart.create({
           "Mailboxes": Ki.State.design({
 
             enterState: function() {
-              // alert("entering goStateD1") ;
               OI.bodyPage.get('mailboxList').becomeFirstResponder() ;
             },
 
@@ -330,7 +331,7 @@ OI.runningStatechart = Ki.Statechart.create({
             "MailboxSelected": Ki.State.design({
 
               enterState: function() {
-                alert("State 'E4' (MailboxSelected) not implemented.") ;
+                this.gotoState('ExamineMailboxMessages') ;
               }
 
             })
