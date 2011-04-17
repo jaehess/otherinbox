@@ -94,6 +94,22 @@ OI.runningStatechart = Ki.Statechart.create({
         CoreOI.flushRecords() ;
       },
 
+      'didBecomeFirstResponder': function(view) {
+        // switch states here based on view
+        // alert("runningStatechart didBecomeFirstResponder: " + view.get('layerId'));
+        var viewName = view.get('layerId');
+        switch(viewName) {
+          case 'mailbox-list':
+            this.gotoState('MailboxSelected');
+            break;
+          case 'message-list':
+            this.gotoState('MessageSelected');
+            break;
+          default:
+            alert("didBecomeFirstResponder doesn't know how to handle view " + viewName);
+        }
+      },
+
       initialSubstate: 'Messages',
 
       "Messages": Ki.State.design({
@@ -424,7 +440,7 @@ OI.runningStatechart = Ki.Statechart.create({
             "MessageSelected": Ki.State.design({
 
               enterState: function() {
-                alert("MessageSelected not implemented");
+                // alert("MessageSelected not implemented");
               },
 
               // MENTORS

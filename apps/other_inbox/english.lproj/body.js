@@ -230,7 +230,7 @@ OI.bodyPage = SC.Page.design({
                   delegate: OI,
                   didBecomeFirstResponder: function() {
                     OI.runningStatechart.invokeStateMethod('didBecomeFirstResponder', this);
-                    return sc_super;
+                    return sc_super();
                   },
                   willLoseFirstResponder: function() {
                     OI.willLoseFirstResponder(this) ;
@@ -373,7 +373,8 @@ OI.bodyPage = SC.Page.design({
                           return OI.moveRight(sender, evt) ;
                         },
                         didBecomeFirstResponder: function() {
-                          OI.didBecomeFirstResponder(this) ;
+                          OI.runningStatechart.invokeStateMethod('didBecomeFirstResponder', this);
+                          return sc_super();
                         },
                         willLoseFirstResponder: function() {
                           OI.willLoseFirstResponder(this) ;
