@@ -13,7 +13,7 @@ OI.BrandingButtonView = OI.ActionButtonView.extend({
   tagName: 'span',
   
   isEnabled: YES,
-  target: OI.runningStateChart, action: 'flushRecords',
+  target: OI.runningStatechart, action: 'flushRecords',
   
   render: function(context, firstTime) {
     context.push('<img src="%@" alt="" />'.fmt(SC.BLANK_IMAGE_URL)) ;

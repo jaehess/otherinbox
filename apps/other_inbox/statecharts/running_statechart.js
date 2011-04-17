@@ -14,7 +14,7 @@
  * @return the statechart to manage the application's "running" state as described
  * in the document Statechart.graffle in folder 'design'.
  */
-OI.runningStateChart = Ki.Statechart.create({
+OI.runningStatechart = Ki.Statechart.create({
 
   rootState: Ki.State.design({
 
@@ -84,7 +84,7 @@ OI.runningStateChart = Ki.Statechart.create({
          CoreOI.undo() ;
       },
 
-      // oldfartdeveloper: not implemented yet in OI.runningStateChart
+      // oldfartdeveloper: not implemented yet in OI.runningStatechart
       flushRecords: function() {
         // MENTORS
         // I'm letting CoreOI.flushRecords have a go at this; see what happens.

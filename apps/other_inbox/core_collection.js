@@ -11,7 +11,7 @@ sc_require('controllers/messages');
 SC.mixin(OI, {
   
   collectionViewSelectionForProposedSelection: function(view, sel) {
-    return OI.runningStateChart.invokeStateMethod('collectionViewSelectionForProposedSelection', view, sel);
+    return OI.runningStatechart.invokeStateMethod('collectionViewSelectionForProposedSelection', view, sel);
     // var state = this.state ;
     // if (view === OI.bodyPage.get('messageList')) {
     //   if (state.a === 1) {

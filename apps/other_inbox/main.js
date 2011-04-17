@@ -39,7 +39,7 @@ function enterApplication() {
   var user = CoreOI.get('user') ;
   OI.userController.set('content', user) ;
 
-  OI.runningStateChart.initStatechart();
+  OI.runningStatechart.initStatechart();
 /*
 Old state chart
   // install our chrome updating function to run when necessary

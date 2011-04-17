@@ -17,7 +17,7 @@ OI.ControlsView = SC.View.extend({
       classNames: 'admin',
       value: "_Admin".loc(),
       isVisibleBinding: SC.Binding.bool('OI.userController.admin').oneWay(),
-      target: OI.runningStateChart, action: 'openAdmin',
+      target: OI.runningStatechart, action: 'openAdmin',
       layout:{ top:2 }
     }),
       
@@ -25,7 +25,7 @@ OI.ControlsView = SC.View.extend({
       tagName: "a",
       classNames: 'sign-out',
       value: "_Sign out".loc(),
-      target: OI.runningStateChart, action: 'goToSignIn',
+      target: OI.runningStatechart, action: 'goToSignIn',
       layout:{ top:2 }
     })
   ]
