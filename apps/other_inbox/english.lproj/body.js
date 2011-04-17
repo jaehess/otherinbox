@@ -107,7 +107,7 @@ OI.bodyPage = SC.Page.design({
             title: "Coupons",
             target: 'OI.runningStateChart', action: 'makeComingSoonFlash'
           }),
-          
+
           calendar: OI.ToolbarButtonView.design({
             layerId: 'calendar_button',
             layout: { top: 0, bottom: 0, left: 216, width: 72 },
@@ -229,7 +229,8 @@ OI.bodyPage = SC.Page.design({
                   acceptsFirstResponder: YES,
                   delegate: OI,
                   didBecomeFirstResponder: function() {
-                    OI.didBecomeFirstResponder(this) ;
+                    OI.runningStatechart.invokeStateMethod('didBecomeFirstResponder', this);
+                    return sc_super;
                   },
                   willLoseFirstResponder: function() {
                     OI.willLoseFirstResponder(this) ;
