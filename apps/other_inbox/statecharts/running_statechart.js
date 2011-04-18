@@ -271,9 +271,9 @@ OI.runningStatechart = Ki.Statechart.create({
             }
           },
 
-          initialSubstate: 'Mailboxes',
+          initialSubstate: 'FocusMailboxes',
 
-          "Mailboxes": Ki.State.design({
+          "FocusMailboxes": Ki.State.design({
 
             enterState: function() {
               OI.bodyPage.get('mailboxList').becomeFirstResponder() ;
@@ -338,7 +338,7 @@ OI.runningStatechart = Ki.Statechart.create({
 
           }),
 
-          "Messages": Ki.State.design({
+          "FocusMessages": Ki.State.design({
 
             enterState: function() {
               // alert("entering State 'D2' (Focus>Messages)" ;
@@ -483,7 +483,7 @@ OI.runningStatechart = Ki.Statechart.create({
 
         }),
 
-        "Mailbox": Ki.State.design({
+        "MailboxDrag": Ki.State.design({
 
           enterState: function() {
             alert("State 'C4' (Mailbox) (drag) not implemented.") ;
@@ -491,7 +491,7 @@ OI.runningStatechart = Ki.Statechart.create({
 
         }),
 
-        "Messages": Ki.State.design({
+        "MessagesDrag": Ki.State.design({
 
           enterState: function() {
             alert("State 'C5' (Messages) (drag) not implemented.") ;
