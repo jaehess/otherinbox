@@ -149,8 +149,6 @@ OI.runningStatechart = Ki.Statechart.create({
             });
             if (selection.get('length') > 0) {
 
-              // MENTORS
-              // Should following be CoreOI or OI?
               CoreOI.markSelectedMessagesAsRead(selection, YES) ;
             }
           },
@@ -293,9 +291,9 @@ OI.runningStatechart = Ki.Statechart.create({
                   } else {
                      if (mailboxes.get('length') === 0) {
                        if (mailboxes.get('queryKey').get('isLoading')) {
-                         this.goState('LoadingMessages') ;
+                         this.gotoState('LoadingMessages') ;
                        } else {
-                         this.goState('FolderHasNoMailboxes') ;
+                         this.gotoState('FolderHasNoMailboxes') ;
                        }
                      } else {
                        var guid = this.folderController.get('guid') ;
@@ -308,7 +306,7 @@ OI.runningStatechart = Ki.Statechart.create({
                          this.selectedMailbox[guid] = mailboxes.firstObject() ;
                          OI.bodyPage.get('mailboxList').select(0, NO) ;
                        }
-                       this.goState('MailboxSelected') ;
+                       this.gotoState('MailboxSelected') ;
                      }
                   }
               }
@@ -364,6 +362,8 @@ OI.runningStatechart = Ki.Statechart.create({
 
             "ExamineMailboxMessages": Ki.State.design({
 
+              selectedMessages: [],
+
               enterState: function() {
                 var messages = OI.mailboxController.get('messages') ;
                 // MENTORS
@@ -371,7 +371,7 @@ OI.runningStatechart = Ki.Statechart.create({
                 // so I'm dropping the clause.  What is the meaning of 'queryKey'?
 //                if (!messages || messages.get('queryKey').get('isLoading')) {
                 if (!messages) {
-                   this.goState('LoadingMessages') ; // we're loading for sure!
+                   this.gotoState('LoadingMessages') ; // we're loading for sure!
                 } else {
                    var guid = OI.mailboxController.get('guid') ;
                    if (this.prefetch) {
@@ -413,7 +413,7 @@ OI.runningStatechart = Ki.Statechart.create({
                        this.selectedMessages[guid] = [messages.firstObject()] ;
                        OI.bodyPage.get('messageList').select(0, NO) ;
                      }
-                     this.goState('MessageSelected') ;
+                     this.gotoState('MessageSelected') ;
                    } else {
                      var sel = OI.bodyPage.getPath('messageList.selection') ;
                      var newSel = [] ;
@@ -422,7 +422,7 @@ OI.runningStatechart = Ki.Statechart.create({
                      });
                      this.selectedMessages[guid] = newSel ;
                      // objects are already selected in the UI
-                     this.goState('MessageSelected') ;
+                     this.gotoState('MessageSelected') ;
                    }
                 }
               }

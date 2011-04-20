@@ -7,7 +7,7 @@
 /*global OI */
 
 OI = SC.Object.create(SC.Statechart, SC.CollectionViewDelegate, {
-  
+
   // Application
   goStateA1: function() {
     // document.title delegated to state B
