@@ -295,7 +295,7 @@ OI.runningStatechart = Ki.Statechart.create({
                        if (mailboxes.get('queryKey').get('isLoading')) {
                          this.goState('LoadingMessages') ;
                        } else {
-                         this.goState('MessageSelected') ;
+                         this.goState('FolderHasNoMailboxes') ;
                        }
                      } else {
                        var guid = this.folderController.get('guid') ;
@@ -318,7 +318,7 @@ OI.runningStatechart = Ki.Statechart.create({
             "LoadingMailboxes": Ki.State.design({
 
               enterState: function() {
-                alert("State 'E2' (LoadingMailBoxes) not implemented.") ;
+                console.info("State 'E2' (LoadingMailBoxes) not implemented.") ;
               }
 
             }),
@@ -428,7 +428,7 @@ OI.runningStatechart = Ki.Statechart.create({
             "LoadingMessages": Ki.State.design({
 
               enterState: function() {
-                alert("State 'F2' (LoadingMessages) not implemented.") ;
+                console.info("State 'F2' (LoadingMessages) not implemented.") ;
               }
 
             }),
