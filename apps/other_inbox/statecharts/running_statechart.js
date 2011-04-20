@@ -281,33 +281,36 @@ OI.runningStatechart = Ki.Statechart.create({
 
             initialSubstate: 'ExamineFolderMailboxes',
 
+            /**
+             * Transitional state
+             */
             "ExamineFolderMailboxes": Ki.State.design({
 
               enterState: function() {
-                  // var mailboxes = this.folderController.get('mailboxes') ;
-                  // if (!mailboxes) {
-                  //   this.goState('e', 2) ; // we're loading for sure!
-                  // } else {
-                  //   if (mailboxes.get('length') === 0) {
-                  //     if (mailboxes.get('queryKey').get('isLoading')) {
-                  //       this.goState('e', 2) ;
-                  //     } else {
-                  //       this.goState('e', 3) ;
-                  //     }
-                  //   } else {
-                  //     var guid = this.folderController.get('guid') ;
-                  //     var sel = this.selectedMailbox[guid] ;
-                  //     if (sel && mailboxes.indexOf(sel) !== -1) {
-                  //       // use previous selection
-                  //       OI.bodyPage.get('mailboxList').select(sel, NO) ;
-                  //     } else {
-                  //       // select the first mailbox (and remember that we did)
-                  //       this.selectedMailbox[guid] = mailboxes.firstObject() ;
-                  //       OI.bodyPage.get('mailboxList').select(0, NO) ;
-                  //     }
-                  //     this.goState('e', 4) ;
-                  //   }
-                  // }
+                  var mailboxes = OI.folderController.get('mailboxes') ;
+                  if (!mailboxes) {
+                     this.gotoState('LoadingMessages') ; // we're loading for sure!
+                  } else {
+                     if (mailboxes.get('length') === 0) {
+                       if (mailboxes.get('queryKey').get('isLoading')) {
+                         this.goState('LoadingMessages') ;
+                       } else {
+                         this.goState('MessageSelected') ;
+                       }
+                     } else {
+                       var guid = this.folderController.get('guid') ;
+                       var sel = this.selectedMailbox[guid] ;
+                       if (sel && mailboxes.indexOf(sel) !== -1) {
+                         // use previous selection
+                         OI.bodyPage.get('mailboxList').select(sel, NO) ;
+                       } else {
+                         // select the first mailbox (and remember that we did)
+                         this.selectedMailbox[guid] = mailboxes.firstObject() ;
+                         OI.bodyPage.get('mailboxList').select(0, NO) ;
+                       }
+                       this.goState('MailboxSelected') ;
+                     }
+                  }
               }
 
             }),
