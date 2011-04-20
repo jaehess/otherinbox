@@ -365,62 +365,66 @@ OI.runningStatechart = Ki.Statechart.create({
             "ExamineMailboxMessages": Ki.State.design({
 
               enterState: function() {
-                // var messages = this.mailboxController.get('messages') ;
-                // if (!messages || messages.get('queryKey').get('isLoading')) {
-                //   this.goState('f', 2) ; // we're loading for sure!
-                // } else {
-                //   var guid = this.mailboxController.get('guid') ;
-                //   if (this.prefetch) {
-                //     if (this.mailboxController.get('unreadCount') === 0) {
-                //       throw new Error("prefetch should be NO since mailbox %@ has no unread messages".fmt(guid)) ;
-                //     }
-                //     // set the previous selection to the first unread message, then select it
-                //     var idx, obj, len = messages.get('length') ;
-                //     for (idx=0; idx<len; ++idx) {
-                //       obj = message.objectAt(idx) ;
-                //       if (obj.get('isUnread')) break ;
-                //     }
-                //     if (idx === len) { // didn't find one but should have
-                //       throw new Error("mailbox %% unreadCount does not match count of unread messages".fmt(guid)) ;
-                //     }
-                //     var sel = [messages[idx]] ;
-                //     this.selectedMessages[guid] = sel ; // save as previous selection
-                //     OI.bodyPage.get('messageList').select(idx, NO) ;
-                //   } else if (OI.bodyPage.getPath('messageList.selection.length') === 0) {
-                //     var sel = this.selectedMessages[guid] ;
-                //     if (sel) {
-                //       var newSel = [], idxSet = SC.IndexSet.create(),
-                //           idx, obj, len = sel.get('length') ;
-                //       for (idx=0; idx<len; ++idx) {
-                //         obj = sel[idx] ;
-                //         if (messages.indexOf(obj) !== -1) {
-                //           newSel.push(obj) ;
-                //           idxSet.add(idx, 1) ;
-                //         }
-                //       }
-                //       if (newSel.length > 0) {
-                //         this.selectedMessages[guid] = newSel ;
-                //         OI.bodyPage.get('messageList').select(idxSet, NO) ;
-                //       } else {
-                //         this.selectedMessages[guid] = [messages.firstObject()] ;
-                //         OI.bodyPage.get('messageList').select(0, NO) ;
-                //       }
-                //     } else {
-                //       this.selectedMessages[guid] = [messages.firstObject()] ;
-                //       OI.bodyPage.get('messageList').select(0, NO) ;
-                //     }
-                //     this.goState('f', 4) ;
-                //   } else {
-                //     var sel = OI.bodyPage.getPath('messageList.selection') ;
-                //     var newSel = [] ;
-                //     sel.forEach(function(obj) {
-                //       newSel.push(obj) ;
-                //     });
-                //     this.selectedMessages[guid] = newSel ;
-                //     // objects are already selected in the UI
-                //     this.goState('f', 4) ;
-                //   }
-                // }
+                var messages = OI.mailboxController.get('messages') ;
+                // MENTORS
+                // I don't find a 'queryKey' property in the mailboxController,
+                // so I'm dropping the clause.  What is the meaning of 'queryKey'?
+//                if (!messages || messages.get('queryKey').get('isLoading')) {
+                if (!messages) {
+                   this.goState('LoadingMessages') ; // we're loading for sure!
+                } else {
+                   var guid = OI.mailboxController.get('guid') ;
+                   if (this.prefetch) {
+                     if (OI.mailboxController.get('unreadCount') === 0) {
+                       throw new Error("prefetch should be NO since mailbox %@ has no unread messages".fmt(guid)) ;
+                     }
+                     // set the previous selection to the first unread message, then select it
+                     var idx, obj, len = messages.get('length') ;
+                     for (idx=0; idx<len; ++idx) {
+                       obj = message.objectAt(idx) ;
+                       if (obj.get('isUnread')) break ;
+                     }
+                     if (idx === len) { // didn't find one but should have
+                       throw new Error("mailbox %% unreadCount does not match count of unread messages".fmt(guid)) ;
+                     }
+                     var sel = [messages[idx]] ;
+                     this.selectedMessages[guid] = sel ; // save as previous selection
+                     OI.bodyPage.get('messageList').select(idx, NO) ;
+                   } else if (OI.bodyPage.getPath('messageList.selection.length') === 0) {
+                     var sel = this.selectedMessages[guid] ;
+                     if (sel) {
+                       var newSel = [], idxSet = SC.IndexSet.create(),
+                           idx, obj, len = sel.get('length') ;
+                       for (idx=0; idx<len; ++idx) {
+                         obj = sel[idx] ;
+                         if (messages.indexOf(obj) !== -1) {
+                           newSel.push(obj) ;
+                           idxSet.add(idx, 1) ;
+                         }
+                       }
+                       if (newSel.length > 0) {
+                         this.selectedMessages[guid] = newSel ;
+                         OI.bodyPage.get('messageList').select(idxSet, NO) ;
+                       } else {
+                         this.selectedMessages[guid] = [messages.firstObject()] ;
+                         OI.bodyPage.get('messageList').select(0, NO) ;
+                       }
+                     } else {
+                       this.selectedMessages[guid] = [messages.firstObject()] ;
+                       OI.bodyPage.get('messageList').select(0, NO) ;
+                     }
+                     this.goState('MessageSelected') ;
+                   } else {
+                     var sel = OI.bodyPage.getPath('messageList.selection') ;
+                     var newSel = [] ;
+                     sel.forEach(function(obj) {
+                       newSel.push(obj) ;
+                     });
+                     this.selectedMessages[guid] = newSel ;
+                     // objects are already selected in the UI
+                     this.goState('MessageSelected') ;
+                   }
+                }
               }
 
             }),
