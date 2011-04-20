@@ -16,7 +16,7 @@
  */
 OI.runningStatechart = Ki.Statechart.create({
 
-  trace: true,
+  trace: false,
 
   rootState: Ki.State.design({
 
@@ -296,7 +296,7 @@ OI.runningStatechart = Ki.Statechart.create({
                          this.gotoState('FolderHasNoMailboxes') ;
                        }
                      } else {
-                       var guid = this.folderController.get('guid') ;
+                       var guid = OI.folderController.get('guid') ;
                        var sel = this.selectedMailbox[guid] ;
                        if (sel && mailboxes.indexOf(sel) !== -1) {
                          // use previous selection
@@ -464,7 +464,9 @@ OI.runningStatechart = Ki.Statechart.create({
                 var method = enable ? "post" : "delete";
 
                 var ids = sel.map(function(msg) { return msg.get('guid'); }).join(',');
-                OI._batchUpdateMessages({ url: OI.TAG_URL.fmt(ids), tag: tag, method: method });
+                // MENTORS
+                // Erich recommended commenting this out to avoid the www.otherinbox.com timeout
+//                OI._batchUpdateMessages({ url: OI.TAG_URL.fmt(ids), tag: tag, method: method });
               }
 
 
