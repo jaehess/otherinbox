@@ -105,7 +105,7 @@ end
 USERNAME = 'test'
 PASSWORD = 'test'
 
-proxy '/refresh', :to => 'my.otherinbox.com', :https => true, :username => USERNAME, :password => PASSWORD
-proxy '/batch_update', :to => 'my.otherinbox.com', :https => true, :username => USERNAME, :password => PASSWORD
-proxy '/mailboxes', :to => 'my.otherinbox.com', :https => true, :username => USERNAME, :password => PASSWORD
-proxy '/messages', :to => 'my.otherinbox.com', :https => true, :username => USERNAME, :password => PASSWORD
+# proxy '/refresh', :to => 'my.otherinbox.com', :https => true, :username => USERNAME, :password => PASSWORD
+# proxy '/batch_update', :to => 'my.otherinbox.com', :https => true, :username => USERNAME, :password => PASSWORD
+# proxy '/mailboxes', :to => 'my.otherinbox.com', :https => true, :username => USERNAME, :password => PASSWORD
+# proxy '/messages', :to => 'my.otherinbox.com', :https => true, :username => USERNAME, :password => PASSWORD

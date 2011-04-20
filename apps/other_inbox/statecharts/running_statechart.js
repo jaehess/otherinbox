@@ -93,7 +93,7 @@ OI.runningStatechart = Ki.Statechart.create({
 //        alert("OI.flushRecords() is statechart-enabled. Skipping.") ;
 //        return ;
 
-        CoreOI.flushRecords() ;
+//        CoreOI.flushRecords() ;
       },
 
       'didBecomeFirstResponder': function(view) {
@@ -283,6 +283,8 @@ OI.runningStatechart = Ki.Statechart.create({
              * Transitional state
              */
             "ExamineFolderMailboxes": Ki.State.design({
+
+              selectedMailbox: [],
 
               enterState: function() {
                   var mailboxes = OI.folderController.get('mailboxes') ;
