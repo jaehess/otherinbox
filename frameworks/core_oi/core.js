@@ -6,7 +6,6 @@
 // ==========================================================================
 /*global CoreOI */
 
-sc_require('lib/date');
 sc_require('lib/statechart');
 
 CoreOI = SC.Object.create(SC.Statechart, {
