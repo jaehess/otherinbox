@@ -16,11 +16,11 @@ SC.mixin(OI, {
   },
   
   dateToLongDateString: function(date) {
-    return date.format("MMM dd, yyyy hh:mm a");
+    return date.toDateString();
   },
   
   dateToShortDateString: function(date) {
-    return date.format("MMM dd, yyyy");
+    return date.toDateString();
   }
   
 });
